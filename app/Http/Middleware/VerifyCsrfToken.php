@@ -12,7 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'server',
-        'my_soap_server'
+        'soap',
     ];
 }

@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SoapController;
-use \App\Http\Controllers\MySoapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// WITH php2wsdl/php2wsdl
-Route::get('/client', [SoapController::class, 'client'])->name('client');
-Route::get('/wsdl', [SoapController::class, 'wsdl'])->name('wsdl');
-Route::post('/server', [SoapController::class, 'server'])->name('server');
-
-// WITH kduma/laravel-soap-server
-Route::name('my_soap_server.wsdl')->get('/soap.wsdl', [MySoapController::class, 'wsdlProvider']);
-Route::name('my_soap_server')->post('/soap', [MySoapController::class, 'soapServer']);
+Route::get('/soap.wsdl', [SoapController::class, 'wsdlProvider'])->name('soap_wsdl');
+Route::post('/soap', [SoapController::class, 'soapServer'])->name('soap_server');

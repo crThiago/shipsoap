@@ -11,8 +11,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
-        "mtownsend/request-xml": "^2.2",
-        "php2wsdl/php2wsdl": "^0.6.1"
+        "mtownsend/request-xml": "^2.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

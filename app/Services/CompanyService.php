@@ -7,49 +7,15 @@ use Illuminate\Database\Eloquent\Collection;
 
 class CompanyService
 {
-    public $param1 = array();
-    public $param2;
-
-    /**
-     * Constructor.
-     *
-     * @param string $param2
-     */
-    function __construct($param2 = "")
+    public function index(): Collection
     {
-        $this->param2 = $param2;
+        return Company::all();
     }
 
-
-    /**
-     * Adds two numbers.
-     *
-     * @soap
-     *
-     * @param float $p1
-     * @param float $p2
-     * @return float
-     */
-    public function add($p1, $p2)
+    public function show(int $id): Company
     {
-        return ($p1 + $p2);
+        return Company::find($id);
     }
-
-    /**
-     * Make array.
-     *
-     * @param mixed $el1
-     * @param mixed $el2
-     * @return array
-     */
-    public function makeArray($el1, $el2)
-    {
-        return array($el1, $el2);
-    }
-//    public function index()
-//    {
-//        return Company::all();
-//    }
 //
 //    public function store(Collection $collection)
 //    {
