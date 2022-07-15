@@ -52,9 +52,13 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "outputPath": "../../../public/assets/angular",
+              "baseHref": "/assets/angular/",
               "outputHashing": "all"
             },
             "development": {
+              "outputPath": "dist/assets/angular",
+              "baseHref": "/assets/angular/",
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -103,5 +107,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "f5301065-084b-4c76-9c8b-5249911260a0"
   }
 }
