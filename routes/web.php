@@ -18,5 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/soap.wsdl', [SoapController::class, 'wsdlProvider'])->name('soap_wsdl');
-Route::post('/soap', [SoapController::class, 'soapServer'])->name('soap_server');
+Route::get('/soap.wsdl', [SoapController::class, 'wsdlProvider'])
+    ->name('soap_wsdl');
+Route::post('/soap', [SoapController::class, 'soapServer'])
+    ->name('soap_server');
