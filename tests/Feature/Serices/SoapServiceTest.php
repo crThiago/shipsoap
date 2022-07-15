@@ -3,6 +3,7 @@
 namespace Tests\Feature\Serices;
 
 use App\Models\Company;
+use App\Services\CompanyService;
 use Tests\TestCase;
 
 class SoapServiceTest extends TestCase
@@ -13,7 +14,7 @@ class SoapServiceTest extends TestCase
 
         $result = $client->__soapCall('getCompanies', []);
 
-        $this->assertDatabaseCount(Company::class, count($result->getCompaniesResult));
+        $this->assertEquals((new CompanyService())->index()->toJson(), $result->getCompaniesResult);
     }
 
     public function test_get_company_by_id()
@@ -24,6 +25,6 @@ class SoapServiceTest extends TestCase
         $class->id = rand(1, 4);
         $result = $client->__soapCall('getCompany', [$class]);
 
-        $this->assertEquals($result->getCompanyResult[1]->value, Company::find($class->id)->name);
+        $this->assertEquals((new CompanyService())->show($class->id)->toJson(), $result->getCompanyResult);
     }
 }

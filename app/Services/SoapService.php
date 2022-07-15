@@ -17,21 +17,21 @@ class SoapService
     /**
      * Retorna todas as empresas
      *
-     * @return array
+     * @return string
      */
-    public function getCompanies(): array
+    public function getCompanies(): string
     {
-        return $this->_company->index()->toArray();
+        return $this->_company->index()->toJson();
     }
 
     /**
      * Retornar os dados da empresa pelo ID
      *
      * @param int $id
-     * @return array
+     * @return string
      */
-    public function getCompany(int $id): array
+    public function getCompany(int $id): string
     {
-        return $this->_company->show($id)->toArray();
+        return $this->_company->show($id)->toJson();
     }
 }
