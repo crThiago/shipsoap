@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\SoapService;
-use App\Soap\Person;
-use App\Soap\SoapDemoServer;
 use KDuma\SoapServer\AbstractSoapServerController;
 
 class SoapController extends AbstractSoapServerController

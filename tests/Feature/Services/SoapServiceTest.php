@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Serices;
+namespace Tests\Feature\Services;
 
 use App\Models\Company;
 use App\Models\Vehicle;
