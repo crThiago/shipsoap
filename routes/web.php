@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SoapController;
+use App\Http\Controllers\AngularController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +15,7 @@ use App\Http\Controllers\SoapController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::any('/{any}', [AngularController::class, 'index'])->where('any', '^(?!soap).*$');
 
-Route::get('/soap.wsdl', [SoapController::class, 'wsdlProvider'])
-    ->name('soap_wsdl');
-Route::post('/soap', [SoapController::class, 'soapServer'])
-    ->name('soap_server');
+Route::get('/soap.wsdl', [SoapController::class, 'wsdlProvider'])->name('soap_wsdl');
+Route::post('/soap', [SoapController::class, 'soapServer'])->name('soap_server');
