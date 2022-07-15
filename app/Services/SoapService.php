@@ -4,14 +4,14 @@ namespace App\Services;
 
 class SoapService
 {
-    private $_company;
+    private $CompanyService;
 
     /**
      *
      */
     public function __construct()
     {
-        $this->_company = new CompanyService();
+        $this->CompanyService = new CompanyService();
     }
 
     /**
@@ -21,7 +21,7 @@ class SoapService
      */
     public function getCompanies(): string
     {
-        return $this->_company->index()->toJson();
+        return $this->CompanyService->index()->toJson();
     }
 
     /**
@@ -32,6 +32,42 @@ class SoapService
      */
     public function getCompany(int $id): string
     {
-        return $this->_company->show($id)->toJson();
+        return $this->CompanyService->show($id)->toJson();
+    }
+
+    /**
+     * Adiciona uma empresa
+     *
+     * @param string $name
+     * @param string $country
+     * @return string
+     */
+    public function addCompany(string $name, string $country): string
+    {
+        return $this->CompanyService->store(collect(['name' => $name, 'country' => $country]));
+    }
+
+    /**
+     * Atualiza os dados da empresa pelo ID
+     *
+     * @param int $id
+     * @param string $name
+     * @param string $country
+     * @return bool
+     */
+    public function updateCompany(int $id, string $name, string $country): bool
+    {
+        return $this->CompanyService->update($id, collect(['name' => $name, 'country' => $country]));
+    }
+
+    /**
+     * Remove uma empresa pelo ID
+     *
+     * @param int $id
+     * @return bool
+     */
+    public function removeCompany(int $id): bool
+    {
+        return $this->CompanyService->destroy($id);
     }
 }

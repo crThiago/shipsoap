@@ -3,7 +3,8 @@
 namespace App\Services;
 
 use App\Models\Company;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class CompanyService
 {
@@ -14,11 +15,21 @@ class CompanyService
 
     public function show(int $id): Company
     {
-        return Company::find($id);
+        return Company::findOrFail($id);
     }
-//
-//    public function store(Collection $collection)
-//    {
-//        return Company::create($collection->only(['name', 'country']));
-//    }
+
+    public function store(Collection $collection): Company
+    {
+        return Company::create($collection->only(['name', 'country'])->toArray());
+    }
+
+    public function update(int $id, Collection $collection): bool
+    {
+        return Company::where('id', $id)->update($collection->only(['name', 'country'])->toArray());
+    }
+
+    public function destroy(int $id): bool
+    {
+        return Company::where('id', $id)->delete();
+    }
 }
