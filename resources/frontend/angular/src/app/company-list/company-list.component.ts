@@ -6,13 +6,14 @@ import { CompanyService } from '../company.service';
   templateUrl: './company-list.component.html',
   styleUrls: ['./company-list.component.scss']
 })
-export class CompanyListComponent implements OnInit {
+export class CompanyListComponent {
   companies!: Company[]
 
-  constructor(private companiesService: CompanyService ) { }
-
-  ngOnInit(): void {
-    this.companies = this.companiesService.getAllCompanies();
+  constructor(private companiesService: CompanyService ) {
+    this.companiesService.getAllCompanies().subscribe((data) => {
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(data, 'text/xml');
+      this.companies = JSON.parse(xml.getElementsByTagName('getCompaniesResult')[0].childNodes[0].nodeValue  || '{}')
+    })
   }
-
 }
