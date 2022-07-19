@@ -1,22 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { vehicles } from '../vehicles';
+import { Vehicle } from '../vehicles';
+import { VehicleService } from "../vehicle.service";
 
 @Component({
   selector: 'app-vehicle-list',
   templateUrl: './vehicle-list.component.html',
   styleUrls: ['./vehicle-list.component.scss']
 })
-export class VehicleListComponent implements OnInit {
-  vehicles = vehicles
+export class VehicleListComponent {
+  vehicles!: Vehicle[];
 
   constructor(
-    private route: ActivatedRoute
-  ) { }
-
-  ngOnInit(): void {
+    private route: ActivatedRoute,
+    private vehicleService: VehicleService
+  ) {
     let companyId = this.route.snapshot.paramMap.get('companyId');
-    this.vehicles = this.vehicles.filter((vehicle) => vehicle.company_id === Number(companyId))
+    this.vehicleService.getVehicles(Number(companyId))
+      .subscribe((data) => {
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(data, 'text/xml');
+        this.vehicles = JSON.parse(xml.getElementsByTagName('getVehiclesResult')[0].childNodes[0].nodeValue  || '{}')
+      })
   }
 }
