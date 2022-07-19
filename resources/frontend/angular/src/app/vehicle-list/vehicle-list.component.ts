@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Vehicle } from '../vehicles';
 import { VehicleService } from "../vehicle.service";
+import { getResultXML } from "../../assets/functions";
 
 @Component({
   selector: 'app-vehicle-list',
@@ -19,9 +20,7 @@ export class VehicleListComponent {
     let companyId = this.route.snapshot.paramMap.get('companyId');
     this.vehicleService.getVehicles(Number(companyId))
       .subscribe((data) => {
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(data, 'text/xml');
-        this.vehicles = JSON.parse(xml.getElementsByTagName('getVehiclesResult')[0].childNodes[0].nodeValue  || '{}')
+        this.vehicles = getResultXML(data, 'getVehiclesResult');
       })
   }
 }

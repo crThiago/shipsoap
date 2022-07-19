@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-
+import { environment } from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,6 @@ export class VehicleService {
     </soapenv:Envelope>
     `;
 
-    return this.http.post(this.url, xml, {responseType: "text"});
+    return this.http.post(environment.urlSoap, xml, {responseType: "text"});
   }
 }

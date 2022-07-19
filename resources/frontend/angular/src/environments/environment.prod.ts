@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  urlSoap: "http://shipsoap.test/soap"
 };

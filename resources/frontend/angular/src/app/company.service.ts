@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Company, companies } from './companies';
 import { HttpClient } from "@angular/common/http";
+import { environment } from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyService {
   companies: Company[] = [];
-  url: string = 'http://shipsoap.test/soap';
 
   constructor(private http: HttpClient) {}
 
@@ -20,6 +20,6 @@ export class CompanyService {
        </soapenv:Body>
     </soapenv:Envelope>`;
 
-    return this.http.post(this.url, xml,{responseType: "text"});
+    return this.http.post(environment.urlSoap, xml,{responseType: "text"});
   }
 }
