@@ -16,4 +16,12 @@ export class CompanyListComponent {
       this.companies = getResultXML(data, 'getCompaniesResult');
     })
   }
+
+  delete(companyId: number) {
+    this.companiesService.removeCompany(companyId).subscribe((data) => {
+      if (getResultXML(data, 'removeCompanyResult')) {
+        this.companies = this.companies.filter((company) => company.id != companyId)
+      }
+    })
+  }
 }

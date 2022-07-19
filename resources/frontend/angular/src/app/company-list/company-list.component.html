@@ -1,5 +1,6 @@
 <ul>
   <li *ngFor="let company of companies">
     <a [routerLink]="['/vehicles', company.id]">{{ company.id }} - {{ company.name }} - {{ company.country }}</a>
+    <button (click)="delete(company.id)">Excluir</button>
   </li>
 </ul>
