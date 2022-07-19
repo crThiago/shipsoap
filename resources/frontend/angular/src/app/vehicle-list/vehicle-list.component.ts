@@ -23,4 +23,12 @@ export class VehicleListComponent {
         this.vehicles = getResultXML(data, 'getVehiclesResult');
       })
   }
+
+  delete(id: number) {
+    this.vehicleService.removeVehicle(id).subscribe((data) => {
+      if (getResultXML(data, 'removeVehicleResult')) {
+        this.vehicles = this.vehicles.filter((vehicle) =>  vehicle.id != id)
+      }
+    })
+  }
 }

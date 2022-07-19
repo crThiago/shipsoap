@@ -1,5 +1,6 @@
 <ul>
   <li *ngFor="let vehicle of vehicles">
     {{ vehicle.id }} - {{ vehicle.name }}
+    <button (click)="delete(vehicle.id)">Excluir</button>
   </li>
 </ul>

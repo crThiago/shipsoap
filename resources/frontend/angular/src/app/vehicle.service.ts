@@ -24,4 +24,19 @@ export class VehicleService {
 
     return this.http.post(environment.urlSoap, xml, {responseType: "text"});
   }
+
+  removeVehicle(id: number) {
+    const xml: string = `
+    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="http://shipsoap.test/soap">
+       <soapenv:Header/>
+       <soapenv:Body>
+          <soap:removeVehicle>
+             <id>${id}</id>
+          </soap:removeVehicle>
+       </soapenv:Body>
+    </soapenv:Envelope>
+    `;
+
+    return this.http.post(environment.urlSoap, xml, {responseType: "text"});
+  }
 }
