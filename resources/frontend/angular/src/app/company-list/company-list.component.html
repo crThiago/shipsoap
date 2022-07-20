@@ -1,6 +1,18 @@
 <ul>
-  <li *ngFor="let company of companies">
-    <a [routerLink]="['/vehicles', company.id]">{{ company.id }} - {{ company.name }} - {{ company.country }}</a>
-    <button (click)="delete(company.id)">Excluir</button>
+  <li *ngFor="let company of companies; let i = index">
+    <div>
+      <div *ngIf="editCompany !== company">
+        <a [routerLink]="['/vehicles', company.id]">{{ company.id }} - {{ company.name }} - {{ company.country }}</a>
+      </div>
+      <div *ngIf="editCompany === company">
+        <input type="text" [(ngModel)]="editCompany!.name" />
+        <input type="text" [(ngModel)]="editCompany!.country" />
+      </div>
+    </div>
+    <div>
+      <button *ngIf="editCompany === company" (click)="update(editCompany)">Salvar</button>
+      <button *ngIf="editCompany !== company" (click)="editCompany = company">Editar</button>
+      <button (click)="delete(company.id)">Excluir</button>
+    </div>
   </li>
 </ul>

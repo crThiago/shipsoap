@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Company } from '../companies';
 import { CompanyService } from '../company.service';
 import {getResultXML} from "../../assets/functions";
@@ -9,12 +9,18 @@ import {getResultXML} from "../../assets/functions";
   styleUrls: ['./company-list.component.scss']
 })
 export class CompanyListComponent {
-  companies!: Company[]
+  companies!: Company[];
+  editCompany: Company | undefined;
 
   constructor(private companiesService: CompanyService ) {
     this.companiesService.getAllCompanies().subscribe((data) => {
       this.companies = getResultXML(data, 'getCompaniesResult');
     })
+  }
+
+  update(company: Company) {
+    this.companiesService.updateCompany(company).subscribe();
+    this.editCompany = undefined
   }
 
   delete(companyId: number) {
@@ -23,5 +29,9 @@ export class CompanyListComponent {
         this.companies = this.companies.filter((company) => company.id != companyId)
       }
     })
+  }
+
+  enableEdit() {
+
   }
 }
