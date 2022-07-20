@@ -5,8 +5,10 @@
         {{ vehicle.id }} - {{ vehicle.name }}
       </div>
       <div *ngIf="editVehicle === vehicle">
-        <input type="text" [(ngModel)]="editVehicle!.name" />
-        <input type="text" [(ngModel)]="editVehicle!.company_id" />
+        <input type="text" [(ngModel)]="editVehicle.name" />
+        <select [(ngModel)]="editVehicle.company_id">
+          <option *ngFor="let company of companies" value="{{company.id}}"> {{company.name}} </option>
+        </select>
       </div>
     </div>
     <div>
