@@ -13,6 +13,9 @@ import {CompanyService} from "../company.service";
   styleUrls: ['./vehicle-list.component.scss']
 })
 export class VehicleListComponent {
+  form = {
+    name: ''
+  };
   vehicles!: Vehicle[];
   companies!: Company[];
   companyId: number;
@@ -35,10 +38,17 @@ export class VehicleListComponent {
       })
   }
 
+  create() {
+    this.vehicleService.addVehicle(this.form.name, this.companyId)
+      .subscribe((data) => {
+        this.vehicles.push(getResultXML(data, 'addVehicleResult'));
+      });
+  }
+
   update(vehicle: Vehicle) {
     this.vehicleService.updateVehicle(vehicle).subscribe((data) => {
       if (getResultXML(data, 'updateVehicleResult')) {
-        this.vehicles = this.vehicles.filter((vehicle) => vehicle.company_id == this.companyId)
+        this.vehicles = this.vehicles.filter((vehicle) => vehicle.company_id == this.companyId);
       }
     });
     this.editVehicle = undefined;
@@ -47,8 +57,8 @@ export class VehicleListComponent {
   delete(id: number) {
     this.vehicleService.removeVehicle(id).subscribe((data) => {
       if (getResultXML(data, 'removeVehicleResult')) {
-        this.vehicles = this.vehicles.filter((vehicle) =>  vehicle.id != id)
+        this.vehicles = this.vehicles.filter((vehicle) =>  vehicle.id != id);
       }
-    })
+    });
   }
 }
