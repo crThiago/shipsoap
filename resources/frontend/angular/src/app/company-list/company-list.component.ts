@@ -18,6 +18,10 @@ export class CompanyListComponent {
     })
   }
 
+  addCompany(company: Company) {
+    this.companies.push(company);
+  }
+
   update(company: Company) {
     this.companiesService.updateCompany(company).subscribe();
     this.editCompany = undefined

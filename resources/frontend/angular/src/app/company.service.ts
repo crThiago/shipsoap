@@ -23,6 +23,21 @@ export class CompanyService {
     return this.http.post(environment.urlSoap, xml,{responseType: "text"});
   }
 
+  addCompany(name: string, country: string) {
+    const xml: string = `
+    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="http://shipsoap.test/soap">
+      <soapenv:Header/>
+      <soapenv:Body>
+          <soap:addCompany>
+            <name>${name}</name>
+            <country>${country}</country>
+          </soap:addCompany>
+      </soapenv:Body>
+    </soapenv:Envelope>`;
+
+    return this.http.post(environment.urlSoap, xml,{responseType: "text"});
+  }
+
   updateCompany(company: Company) {
     const xml: string = `
     <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="http://shipsoap.test/soap">
