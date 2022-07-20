@@ -12,16 +12,27 @@ import { getResultXML } from "../../assets/functions";
 })
 export class VehicleListComponent {
   vehicles!: Vehicle[];
+  companyId: number;
+  editVehicle: Vehicle | undefined;
 
   constructor(
     private route: ActivatedRoute,
     private vehicleService: VehicleService
   ) {
-    let companyId = this.route.snapshot.paramMap.get('companyId');
-    this.vehicleService.getVehicles(Number(companyId))
+    this.companyId = Number(this.route.snapshot.paramMap.get('companyId'));
+    this.vehicleService.getVehicles(this.companyId)
       .subscribe((data) => {
         this.vehicles = getResultXML(data, 'getVehiclesResult');
       })
+  }
+
+  update(vehicle: Vehicle) {
+    this.vehicleService.updateVehicle(vehicle).subscribe((data) => {
+      if (getResultXML(data, 'updateVehicleResult')) {
+        this.vehicles = this.vehicles.filter((vehicle) => vehicle.company_id == this.companyId)
+      }
+    });
+    this.editVehicle = undefined;
   }
 
   delete(id: number) {

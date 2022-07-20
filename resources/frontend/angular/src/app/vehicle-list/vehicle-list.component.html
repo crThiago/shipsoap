@@ -1,6 +1,18 @@
 <ul>
   <li *ngFor="let vehicle of vehicles">
-    {{ vehicle.id }} - {{ vehicle.name }}
-    <button (click)="delete(vehicle.id)">Excluir</button>
+    <div>
+      <div *ngIf="editVehicle !== vehicle">
+        {{ vehicle.id }} - {{ vehicle.name }}
+      </div>
+      <div *ngIf="editVehicle === vehicle">
+        <input type="text" [(ngModel)]="editVehicle!.name" />
+        <input type="text" [(ngModel)]="editVehicle!.company_id" />
+      </div>
+    </div>
+    <div>
+      <button *ngIf="editVehicle === vehicle" (click)="update(editVehicle)">Salvar</button>
+      <button *ngIf="editVehicle !== vehicle" (click)="editVehicle = vehicle">Editar</button>
+      <button (click)="delete(vehicle.id)">Excluir</button>
+    </div>
   </li>
 </ul>
