@@ -8,7 +8,9 @@
       </div>
       <div *ngIf="editCompany === company">
         <input type="text" [(ngModel)]="editCompany!.name" />
-        <input type="text" [(ngModel)]="editCompany!.country" />
+        <select [(ngModel)]="editCompany!.country">
+          <option *ngFor="let country of countries" value="{{country.name}}">{{country.name}}</option>
+        </select>
       </div>
     </div>
     <div>

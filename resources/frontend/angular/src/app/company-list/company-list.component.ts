@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Company } from '../companies';
 import { CompanyService } from '../company.service';
-import {getResultXML} from "../../assets/functions";
+import { getResultXML } from "../../assets/functions";
+import {Country, countries} from "../country";
 
 @Component({
   selector: 'app-company-list',
@@ -10,6 +11,7 @@ import {getResultXML} from "../../assets/functions";
 })
 export class CompanyListComponent {
   companies!: Company[];
+  countries: Country[] = countries;
   editCompany: Company | undefined;
 
   constructor(private companiesService: CompanyService ) {

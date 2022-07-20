@@ -2,6 +2,8 @@
   <label>Nome</label>
   <input type="text" name="name" id="name" [(ngModel)]="name">
   <label>País</label>
-  <input type="text" name="country" id="country" [(ngModel)]="country">
+  <select [(ngModel)]="country.name">
+    <option *ngFor="let country of countries" value="{{country.name}}">{{country.name}}</option>
+  </select>
   <button (click)="create()">Salvar</button>
 </div>
